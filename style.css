@@ -108,17 +108,17 @@ img{
     padding: 2rem 0 4rem; 
 }
 
-.section-title{
+.section__title{
     font-size: var(--h1-font-size);
 }
 
-.section_subtitle{
+.section__subtitle{
     display: block;
     font-size: var(--small-font-size);
     margin-bottom: var(--mb-3);
 }
 
-.section-title, .section_subtitle{
+.section__title, .section__subtitle{
     text-align: center;
 }
 
@@ -152,21 +152,21 @@ img{
     align-items: center;
 }
 
-.nav_logo, .nav_toggle{
+.nav__logo, .nav__toggle{
     color: var(--title-color); 
     font-weight: var(--font-medium);
 }
 
-.nav_logo:hover{
+.nav__logo:hover{
     color: var(--first-color);
 }
 
-.nav_toggle{
+.nav__toggle{
     cursor: pointer;
     font-size: 1.1rem; 
 }
 
-.nav_toggle:hover{
+.nav__toggle:hover{
     color: var(--first-color);
 }
 
@@ -174,7 +174,7 @@ img{
 /* mobile first design */ 
 
 @media screen and (max-width: 770px){
-    .nav_menu{
+    .nav__menu{
         position: fixed;
         bottom: -100%;
         left: 0;
@@ -187,12 +187,12 @@ img{
     }
 }
 
-.nav_list{
+.nav__list{
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem; 
 }
 
-.nav_link{
+.nav__link{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -201,15 +201,15 @@ img{
     font-weight: var(--font-medium);
 }
 
-.nav_link:hover{ 
+.nav__link:hover{ 
     color: var(--first-color); 
 }
 
-.nav_icon{ 
+.nav__icon{ 
     font-size: 1.2rem;
 }
 
-.nav_close{
+.nav__close{
     position: absolute;
     right: 1.3rem;
     bottom: .5rem;
@@ -218,7 +218,7 @@ img{
     color: var(--first-color);
 }
 
-.nav_close:hover{
+.nav__close:hover{
     color: var(--first-color-alt); 
 }
 
