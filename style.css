@@ -546,10 +546,10 @@ img{
 
 
 .qualification [data-content]{
-    
+    display: none;
 }
 
-.qualification_active[data-content]{
+.qualification__active[data-content]{
     display: block;
 }
 
