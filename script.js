@@ -46,3 +46,10 @@ function toggleSkills(){
 skillsHeader.forEach((el) => {
     el.addEventListener('click', toggleSkills)
 })
+
+
+
+/* Qualification tabs close-open */
+const tabs = document.querySelectorAll('[data-target]'), 
+      tabContents = document.querySelectorAll('[data-content]')
+
