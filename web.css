@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap');
+
+
+*{ 
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+
+body{
+    margin: 0 0 3rem 0; 
+    background-color: #23252C;
+}
+
+
+.main_container{
+   
+    width: 33.3%;
+    margin: 5rem auto;
+    min-width: 3.5rem;
+    border: .1rem solid;
+}
+
+.card-outline{
+    width: 100%;
+    border: .1rem solid;
+    margin: 0 auto;
+    border-radius: 1rem;
+    background-color: #000;
+    box-sizing: border-box;
+}
+
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+
+img{
+    max-width: 100%;
+    height: 250px;
+    background-position: center;
+    border-radius: 1rem;
+    margin-bottom: 0;
+    background-size: cover;
+}
+
+.bio-description{
+    text-align: center;
+}
+
+h1{
+    font-weight: 600;
+    font-size: 25px;
+    color: white;
+    line-height: 30px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+h3{
+    font-weight: 400;
+    font-size: 13px;
+    color: #F3BF99;
+    line-height: 15.5px;
+    margin-top: 10px;
+    margin-bottom: 10px;  
+}
+
+p{
+    font-weight: 400;
+    font-size: 11px;
+    color: #F5F5F5;
+    line-height: 15px;
+}
+
+.buttons-social{
+   display: flex;
+   flex-direction: row;
+   justify-content: space-around; 
+}
+
+.email, .linkedin{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 115px;
+    height: 35px;
+    border-radius: 6px;
+    box-sizing: border-box;
+    box-shadow: 0px 1px 2px rgba(0,0,0, 0.05);
+}
+
+.buttons-social a{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.email{
+    background-color: white;
+    border: 1px solid #D1D5DB;
+    color: #374151;
+}
+
+.linkedin{
+    background-color: #5093E2;
+    border: 1px solid #3787e2;
+    color: #FFFFFF;
+}
+
+.email:hover,
+.linkedin:hover{
+    background-color: #575758;
+    border: 1px solid #e7e8ea;
+    color: #f7f8fa;
+}
+
+.about{
+    padding: 13px 30px;
+}
+
+.about h2{
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: #F5F5F5
+}
+
+.about p{
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 15px;
+    color: #dcdcdc
+}
+
+footer{
+    margin-bottom: 10px;
+    background-color: #161619;
+}
+
+.social-links{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 75%;
+    margin: auto;
+}
+
+.link-icon{
+    font-size: 1.5rem;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.link-icon>.uil{
+    width: 25px;
+    height: 25px;
+    background-color: #918E9B;
+    padding-top: 2px;
+    border-radius: 3px;
+}
+
+.link-icon>.uil:hover{
+    background-color: #C7C6C9;
+}
