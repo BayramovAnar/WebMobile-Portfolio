@@ -1109,6 +1109,7 @@ body.dark-theme{
 
 
 @media screen and (min-width: 1024px){
+
     .header,
     .main, 
     .footer__container{
@@ -1155,3 +1156,8 @@ body.dark-theme{
         grid-template-columns: repeat(2, 1fr);
     }
 }
+
+
+
+
+
