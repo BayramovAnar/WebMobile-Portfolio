@@ -1,3 +1,7 @@
+import { createContent } from "./content.js"
+import { createHeader } from "./header.js"
+
+
 // function to convert degrees to wind direction 
 export const windDirection = (degree) => {
     if (degree > 337.5) {return 'northern'}; 
@@ -16,4 +20,13 @@ export const capitalizeLetter = (string) => {
     return string.charAt(0).toUpperCase()+string.slice(1); 
 }
 
+
+//function for the currentLocation weather data
+export const resetWeatherContent = (city, weather) => {
+    localStorage.setItem('city', JSON.stringify(city)); //when reloading, user location will be saved 
+    document.body.innerHTML = ''; //clearing out the current body elements
+    const header = createHeader(city); 
+    const content = createContent(weather); 
+    document.body.append(header, content); 
+}
 

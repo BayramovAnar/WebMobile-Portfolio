@@ -1,3 +1,5 @@
+import { currentGeolocationWeather } from "./location.js";
+
 //func to display the header info
 export const createHeader = (city) => {
     const header = document.createElement('header'); 
@@ -50,7 +52,7 @@ export const createHeader = (city) => {
     unitC.textContent = 'C°'; 
     unitF.textContent = 'F°'; 
 
-
+    cityLocation.addEventListener('click', currentGeolocationWeather); 
    
 
      
