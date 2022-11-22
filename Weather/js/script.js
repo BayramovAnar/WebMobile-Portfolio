@@ -13,3 +13,7 @@ const app = async () => {
 }
 
 app(); 
+
+
+//TODO: 1.User input for longitude and latitude to get the weather 
+//TODO: 2.Display country alongside city 
