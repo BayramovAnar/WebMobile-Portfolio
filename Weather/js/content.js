@@ -29,16 +29,15 @@ export const createContent = (data) => {
     description.classList.add('weather__description'); 
     weatherInfo.classList.add('weather-info'); 
     weatherInfoList.classList.add('weather-info__list'); 
-    weatherInfoMinTemp.classList.add('weather-info__list'); 
-    weatherInfoMaxTemp.classList.add('weather-info__list');
-    weatherInfoRealFeel.classList.add('weather-info__list');
-    weatherInfoHumidity.classList.add('weather-info__list');
-    weatherInfoPressure.classList.add('weather-info__list');
-    weatherInfoWindSpeed.classList.add('weather-info__list');
-    responseDate.classList.add('weather-info__list'); 
+    weatherInfoMinTemp.classList.add('weather-info__item'); 
+    weatherInfoMaxTemp.classList.add('weather-info__item');
+    weatherInfoRealFeel.classList.add('weather-info__item');
+    weatherInfoHumidity.classList.add('weather-info__item');
+    weatherInfoPressure.classList.add('weather-info__item');
+    weatherInfoWindSpeed.classList.add('weather-info__item');
+    responseDate.classList.add('weather-info__item', 'response'); 
 
     temperature.textContent = Math.floor(data.main.temp); 
-    
     description.textContent = capitalizeLetter(data.weather[0].description); 
     iconBloc.src = `https://openweathermap.org/img/w/${data.weather[0].icon}.png`;
     unit.textContent = '°'; 
@@ -63,12 +62,12 @@ export const createContent = (data) => {
     )
 
     weatherInfoMinTemp.append(
-        createWeatherItemTitle('Minimum temperature'),
+        createWeatherItemTitle('Min. temp'),
         createWeatherItemContent(Math.round(data.main.temp_min) + 'C°')
     )
 
     weatherInfoMaxTemp.append(
-        createWeatherItemTitle('Maximum temperature'),
+        createWeatherItemTitle('Max. temp'),
         createWeatherItemContent(Math.round(data.main.temp_max) + 'C°')
     )
     
@@ -91,14 +90,7 @@ export const createContent = (data) => {
     function unixConverter(data){
         let unix_timestamp = data; 
         var date = new Date(unix_timestamp * 1000); 
-        var year = date.getFullYear(); 
-        var month = date.getMonth(); 
-        var day = date.getDay(); 
-        var hours = date.getHours(); 
-        var mins = "0" + date.getMinutes(); 
-        var secs = "0" + date.getSeconds(); 
-        var formattedTime = day + '/' + month + '/' + year + '.' + "\n" + hours + ':' + mins.substr(-2) + ':' + secs.substr(-2); 
-        return formattedTime; 
+       return date; 
     }
 
     responseDate.append(

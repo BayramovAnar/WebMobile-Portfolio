@@ -1,5 +1,11 @@
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
 .weather {
-  padding-top: 180px;
+  padding-top: 178px;
 }
 
 .weather__container {
@@ -59,9 +65,12 @@
 }
 
 .weather-info__item {
+  /*width: 10rem; */
+  flex-basis: 100px;
   display: flex;
   flex-direction: column;
   justify-content: start;
+  align-self: baseline;
 }
 
 .weather-info__item span {
@@ -78,4 +87,9 @@
   font-size: 25px;
   line-height: 30px;
   color: var(--color-white);
+}
+
+.response p {
+  width: 300px;
+  font-size: 20px;
 }
