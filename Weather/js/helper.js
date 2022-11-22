@@ -30,3 +30,11 @@ export const resetWeatherContent = (city, weather) => {
     document.body.append(header, content); 
 }
 
+//functions to change between celsius and fahrenheit
+export const toF = (celsius) =>{
+    return celsius * 9 / 5 + 32; 
+}
+
+export const toC = (fahrenheit) =>{
+    return (fahrenheit - 32) * 5 / 9; 
+}

@@ -1,3 +1,5 @@
+import { getWeatherData } from "./api.js";
+import { resetWeatherContent } from "./helper.js";
 import { currentGeolocationWeather } from "./location.js";
 
 //func to display the header info
@@ -54,8 +56,44 @@ export const createHeader = (city) => {
 
     cityLocation.addEventListener('click', currentGeolocationWeather); 
    
+    cityChange.addEventListener('click', () => {
+        headerCity.innerHTML = ''; 
+        searchBlock.append(searchInput, searchBtn, errBlock); 
+        headerCity.append(searchBlock); 
+    }); 
 
-     
+    const showError = (message) =>{
+        errBlock.classList.add('show__error'); 
+        errBlock.textContent = message; 
+    }
+
+     searchBtn.addEventListener('click', async () => {
+        if(!searchInput.value){
+            return showError("Please enter a city"); 
+        }
+        try {
+            const weather = await getWeatherData(searchInput.value); 
+            console.log(weather); 
+            if(weather.message){
+                showError(weather.message); 
+                return; 
+            }
+            resetWeatherContent(weather.name, weather); 
+        } catch (error) {
+           console.log(error); 
+        }
+     }); 
+
+     window.addEventListener('click', (e) =>{
+        if(e.target == searchInput || e.target == searchBtn || e.target == cityChange){
+            return; 
+        }else{
+            headerCity.innerHTML = ''; 
+            errBlock.classList.remove('show__error'); 
+            headerCity.append(cityName, cityInner); 
+        }
+     }); 
+
 
     header.append(headerContainer); 
     headerContainer.append(headerCity, headerUnit); 

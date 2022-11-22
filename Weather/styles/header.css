@@ -95,7 +95,7 @@
   text-transform: uppercase;
   font-size: 30px;
   line-height: 36px;
-  color: #1fe405;
+  color: rgb(78, 78, 255);
 }
 
 .search__error {
