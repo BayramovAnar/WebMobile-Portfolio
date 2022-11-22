@@ -1,3 +1,5 @@
+import { capitalizeLetter, windDirection } from "./helper.js";
+
 export const createContent = (data) => {
     const main = document.createElement('main'); 
     const section = document.createElement('section'); 
@@ -37,7 +39,7 @@ export const createContent = (data) => {
 
     temperature.textContent = Math.floor(data.main.temp); 
     
-    description.textContent = data.weather[0].description; 
+    description.textContent = capitalizeLetter(data.weather[0].description); 
     iconBloc.src = `https://openweathermap.org/img/w/${data.weather[0].icon}.png`;
     unit.textContent = '°'; 
 
@@ -54,6 +56,11 @@ export const createContent = (data) => {
 
         return p; 
     }
+
+    weatherInfoWindSpeed.append(
+        createWeatherItemTitle('Wind'),
+        createWeatherItemContent(data.wind.speed + 'm/s, ' +  windDirection(data.wind.deg))
+    )
 
     weatherInfoMinTemp.append(
         createWeatherItemTitle('Minimum temperature'),
@@ -98,6 +105,7 @@ export const createContent = (data) => {
         createWeatherItemTitle('Time of response'),
         createWeatherItemContent(unixConverter(data.dt))
     )
+    
 
 
     main.append(section); 
@@ -106,12 +114,12 @@ export const createContent = (data) => {
     inner.append(iconBloc, temperature, unit); 
     weatherInfo.append(weatherInfoList); 
     weatherInfoList.append(
+        weatherInfoWindSpeed,
         weatherInfoMinTemp,
         weatherInfoMaxTemp,
         weatherInfoRealFeel,
         weatherInfoHumidity,
         weatherInfoPressure,
-        weatherInfoWindSpeed,
         responseDate
     ); 
 
