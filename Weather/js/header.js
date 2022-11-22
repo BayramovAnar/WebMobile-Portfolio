@@ -1,5 +1,5 @@
 import { getWeatherData } from "./api.js";
-import { resetWeatherContent } from "./helper.js";
+import { resetWeatherContent, toC, toF } from "./helper.js";
 import { currentGeolocationWeather } from "./location.js";
 
 //func to display the header info
@@ -93,6 +93,32 @@ export const createHeader = (city) => {
             headerCity.append(cityName, cityInner); 
         }
      }); 
+
+     unitC.addEventListener('click', () => {
+        if(unitC.classList.contains('unit-current')) return;   
+        
+        unitC.classList.add('unit-current'); 
+        unitF.classList.remove('unit-current'); 
+
+        document.querySelector('.weather__unit').textContent = '°'; 
+        const temp = document.querySelector('.weather__temperature'); 
+        const converted = toC(+temp.textContent); 
+        temp.textContent = Math.round(converted); 
+     });
+
+
+     unitF.addEventListener('click', () => {
+        if(unitF.classList.contains('unit-current')) return;   
+        
+        unitF.classList.add('unit-current'); 
+        unitC.classList.remove('unit-current'); 
+
+        document.querySelector('.weather__unit').textContent = 'F'; 
+        const temp = document.querySelector('.weather__temperature'); 
+        const converted = toF(+temp.textContent); 
+        temp.textContent = Math.round(converted); 
+     });
+
 
 
     header.append(headerContainer); 
