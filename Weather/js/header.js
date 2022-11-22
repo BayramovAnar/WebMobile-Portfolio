@@ -1,6 +1,7 @@
 import { getWeatherData } from "./api.js";
 import { resetWeatherContent, toC, toF } from "./helper.js";
 import { currentGeolocationWeather } from "./location.js";
+import { getWeatherWithCoordinates } from "./api.js"; 
 
 //func to display the header info
 export const createHeader = (city) => {
@@ -12,6 +13,7 @@ export const createHeader = (city) => {
 
     const cityChange = document.createElement('button'); 
     const cityLocation = document.createElement('button'); 
+    const coordinatesButton = document.createElement('button'); 
     const cityName = document.createElement('h1'); 
     const countryName = document.createElement('h1'); 
 
@@ -24,6 +26,28 @@ export const createHeader = (city) => {
     const searchBtn = document.createElement('button'); 
     const errBlock = document.createElement('p'); 
 
+    const coordinatesBlockDiv = document.createElement('div'); 
+    const coordinatesForm = document.createElement('form');
+    const coordinatesBlockInput1 = document.createElement('input'); 
+    const coordinatesBlockInput2 = document.createElement('input'); 
+    const coordinatesFormBtn = document.createElement('button');  
+
+    coordinatesForm.setAttribute("method", "post"); 
+    coordinatesBlockInput1.setAttribute("type", "text"); 
+    coordinatesBlockInput1.setAttribute("name", "lat");
+    coordinatesBlockInput1.setAttribute("placeholder", "Latitude");
+
+    coordinatesBlockInput2.setAttribute("type", "text"); 
+    coordinatesBlockInput2.setAttribute("name", "lon");
+    coordinatesBlockInput2.setAttribute("placeholder", "Longitude");
+
+    coordinatesBlockDiv.classList.add('coordinates_div'); 
+    coordinatesForm.classList.add('coordinates_form'); 
+    coordinatesBlockInput1.classList.add('coordinates_inp1'); 
+    coordinatesBlockInput2.classList.add('coordinates_inp2'); 
+
+    coordinatesFormBtn.classList.add('formBtn'); 
+
     header.classList.add('header'); 
     headerContainer.classList.add('container', 'header__container'); 
     headerCity.classList.add('header__city'); 
@@ -32,6 +56,7 @@ export const createHeader = (city) => {
 
     cityChange.classList.add('city__change', 'btn-reset'); 
     cityLocation.classList.add('city__location', 'btn-reset'); 
+    coordinatesButton.classList.add('btn-reset', 'coordinatesBtn'); 
     cityName.classList.add('city__name'); 
     countryName.classList.add('country__name'); 
     cityInner.classList.add('city__inner'); 
@@ -50,11 +75,18 @@ export const createHeader = (city) => {
     //countryName.textContent = country.data.sys.country.description; 
     cityChange.textContent = 'Change city';
     cityLocation.textContent = 'Current location';
+    coordinatesButton.textContent = 'Latitude/Longitude';
+    coordinatesFormBtn.textContent = "OK";
 
     unitC.textContent = 'C°'; 
     unitF.textContent = 'F°'; 
 
     cityLocation.addEventListener('click', currentGeolocationWeather); 
+
+    const showError = (message) =>{
+        errBlock.classList.add('show__error'); 
+        errBlock.textContent = message; 
+    }
    
     cityChange.addEventListener('click', () => {
         headerCity.innerHTML = ''; 
@@ -62,10 +94,31 @@ export const createHeader = (city) => {
         headerCity.append(searchBlock); 
     }); 
 
-    const showError = (message) =>{
-        errBlock.classList.add('show__error'); 
-        errBlock.textContent = message; 
-    }
+    coordinatesButton.addEventListener('click', () => {
+       headerCity.innerHTML = '';
+       coordinatesBlockDiv.append(coordinatesForm, coordinatesBlockInput1, coordinatesBlockInput2, coordinatesFormBtn); 
+       headerCity.append(coordinatesBlockDiv);
+        
+    }); 
+
+    coordinatesFormBtn.addEventListener('click', async () => {
+        if(!coordinatesBlockInput1.value || !coordinatesBlockInput2.value){
+            return showError("Please enter both latitude and longitude"); 
+        }
+        try {
+            const weather = await getWeatherWithCoordinates(coordinatesBlockInput1.value, coordinatesBlockInput2.value); 
+            console.log(weather); 
+            if(weather.message){
+                showError(weather.message); 
+                return; 
+            }
+            resetWeatherContent(weather.name, weather); 
+        } catch (error) {
+           console.log(error); 
+        }
+     }); 
+
+   
 
      searchBtn.addEventListener('click', async () => {
         if(!searchInput.value){
@@ -84,8 +137,9 @@ export const createHeader = (city) => {
         }
      }); 
 
+
      window.addEventListener('click', (e) =>{
-        if(e.target == searchInput || e.target == searchBtn || e.target == cityChange){
+        if(e.target == searchInput || e.target == searchBtn || e.target == cityChange || e.target == coordinatesButton || e.target == coordinatesForm || e.target == coordinatesBlockInput1 || e.target == coordinatesBlockInput2 || e.target == coordinatesFormBtn){
             return; 
         }else{
             headerCity.innerHTML = ''; 
@@ -123,7 +177,7 @@ export const createHeader = (city) => {
 
     header.append(headerContainer); 
     headerContainer.append(headerCity, headerUnit); 
-    cityInner.append(cityChange, cityLocation); 
+    cityInner.append(cityChange, coordinatesButton, cityLocation); 
     headerCity.append(cityName, countryName, cityInner);
     headerUnit.append(unitC, unitF); 
     
