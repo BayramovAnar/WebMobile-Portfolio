@@ -1,5 +1,5 @@
 //func to display the header info
-export const createHeader = (city, country) => {
+export const createHeader = (city) => {
     const header = document.createElement('header'); 
     const headerContainer = document.createElement('div'); 
     const headerCity = document.createElement('div'); 
@@ -42,12 +42,18 @@ export const createHeader = (city, country) => {
 
     searchBtn.textContent = 'OK'; 
     cityName.textContent = city; 
-    countryName.textContent = country; 
+    //countryName.textContent = 'AZ';
+    //countryName.textContent = country.data.sys.country.description; 
     cityChange.textContent = 'Change city';
     cityLocation.textContent = 'Current location';
 
     unitC.textContent = 'C°'; 
     unitF.textContent = 'F°'; 
+
+
+   
+
+     
 
     header.append(headerContainer); 
     headerContainer.append(headerCity, headerUnit); 

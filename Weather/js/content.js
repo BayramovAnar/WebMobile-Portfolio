@@ -15,7 +15,8 @@ export const createContent = (data) => {
     const weatherInfoRealFeel = document.createElement('li'); 
     const weatherInfoHumidity = document.createElement('li');
     const weatherInfoPressure = document.createElement('li');  
-    const weatherInfoWindSpeed = document.createElement('li'); 
+    const weatherInfoWindSpeed = document.createElement('li');
+    const responseDate = document.createElement('li');  
 
     section.classList.add('weather'); 
     container.classList.add('container', 'weather__container'); 
@@ -32,13 +33,72 @@ export const createContent = (data) => {
     weatherInfoHumidity.classList.add('weather-info__list');
     weatherInfoPressure.classList.add('weather-info__list');
     weatherInfoWindSpeed.classList.add('weather-info__list');
+    responseDate.classList.add('weather-info__list'); 
 
     temperature.textContent = Math.floor(data.main.temp); 
+    
     description.textContent = data.weather[0].description; 
     iconBloc.src = `https://openweathermap.org/img/w/${data.weather[0].icon}.png`;
     unit.textContent = '°'; 
 
+    const createWeatherItemTitle = (text) => {
+        const span = document.createElement('span'); 
+        span.textContent = text; 
+
+        return span; 
+    }
+
+    const createWeatherItemContent = (text) => {
+        const p = document.createElement('p'); 
+        p.textContent = text; 
+
+        return p; 
+    }
+
+    weatherInfoMinTemp.append(
+        createWeatherItemTitle('Minimum temperature'),
+        createWeatherItemContent(Math.round(data.main.temp_min) + 'C°')
+    )
+
+    weatherInfoMaxTemp.append(
+        createWeatherItemTitle('Maximum temperature'),
+        createWeatherItemContent(Math.round(data.main.temp_max) + 'C°')
+    )
     
+    weatherInfoRealFeel.append(
+        createWeatherItemTitle('Feels like'),
+        createWeatherItemContent(data.main.feels_like + 'C°')
+    )
+
+    weatherInfoHumidity.append(
+        createWeatherItemTitle('Humidity'),
+        createWeatherItemContent(data.main.humidity + '%')
+    )
+
+    weatherInfoPressure.append(
+        createWeatherItemTitle('Pressure'),
+        createWeatherItemContent(data.main.pressure + 'hPa')
+    )
+
+    //Unix time converter
+    function unixConverter(data){
+        let unix_timestamp = data; 
+        var date = new Date(unix_timestamp * 1000); 
+        var year = date.getFullYear(); 
+        var month = date.getMonth(); 
+        var day = date.getDay(); 
+        var hours = date.getHours(); 
+        var mins = "0" + date.getMinutes(); 
+        var secs = "0" + date.getSeconds(); 
+        var formattedTime = day + '/' + month + '/' + year + '.' + "\n" + hours + ':' + mins.substr(-2) + ':' + secs.substr(-2); 
+        return formattedTime; 
+    }
+
+    responseDate.append(
+        createWeatherItemTitle('Time of response'),
+        createWeatherItemContent(unixConverter(data.dt))
+    )
+
 
     main.append(section); 
     section.append(container); 
@@ -51,7 +111,8 @@ export const createContent = (data) => {
         weatherInfoRealFeel,
         weatherInfoHumidity,
         weatherInfoPressure,
-        weatherInfoWindSpeed
+        weatherInfoWindSpeed,
+        responseDate
     ); 
 
     return main; 
