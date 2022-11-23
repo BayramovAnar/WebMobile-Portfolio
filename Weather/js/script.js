@@ -12,7 +12,3 @@ const app = async () => {
 }
 
 app(); 
-
-
-//TODO: 1.Fix latitude messages
-//TODO: 2.Display country alongside city 

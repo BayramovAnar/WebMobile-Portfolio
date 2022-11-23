@@ -15,7 +15,6 @@ export const createHeader = (city) => {
     const cityLocation = document.createElement('button'); 
     const coordinatesButton = document.createElement('button'); 
     const cityName = document.createElement('h1'); 
-    const countryName = document.createElement('h1'); 
 
     const unitC = document.createElement('button'); 
     const unitF = document.createElement('button'); 
@@ -58,7 +57,6 @@ export const createHeader = (city) => {
     cityLocation.classList.add('city__location', 'btn-reset'); 
     coordinatesButton.classList.add('btn-reset', 'coordinatesBtn'); 
     cityName.classList.add('city__name'); 
-    countryName.classList.add('country__name'); 
     cityInner.classList.add('city__inner'); 
 
     unitC.classList.add('unit__c', 'btn-reset', 'unit-current'); 
@@ -71,7 +69,6 @@ export const createHeader = (city) => {
 
     searchBtn.textContent = 'OK'; 
     cityName.textContent = city; 
-    countryName.textContent = city;
     cityChange.textContent = 'Change city';
     cityLocation.textContent = 'Current location';
     coordinatesButton.textContent = 'Latitude/Longitude';
@@ -181,7 +178,7 @@ export const createHeader = (city) => {
     header.append(headerContainer); 
     headerContainer.append(headerCity, headerUnit); 
     cityInner.append(cityChange, coordinatesButton, cityLocation); 
-    headerCity.append(cityName, countryName, cityInner);
+    headerCity.append(cityName, cityInner);
     headerUnit.append(unitC, unitF); 
     
     return header;

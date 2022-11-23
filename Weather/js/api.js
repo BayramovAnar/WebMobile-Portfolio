@@ -19,6 +19,17 @@ export const getWeatherWithCoordinates = async (latitude, longitude) => {
     }
 }
 
+//function for country name display 
+export const getCountry = async (country) => { //func to get the weather data
+    try {
+        //const response = await fetch(`https://restcountries.com/v3.1/alpha/&q=${country}`); 
+        const response = await fetch(`https://restcountries.com/v3.1/alpha/${country}`); 
+        return await response.json()
+    } catch (error) {
+        console.error
+    }
+}
+
 
 
 

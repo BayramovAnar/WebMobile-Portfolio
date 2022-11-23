@@ -1,3 +1,4 @@
+import { getCountry } from "./api.js";
 import { capitalizeLetter, windDirection } from "./helper.js";
 
 export const createContent = (data) => {
@@ -9,6 +10,7 @@ export const createContent = (data) => {
     const temperature = document.createElement('h2'); 
     const unit = document.createElement('span'); 
     const description = document.createElement('p'); 
+ 
 
     const weatherInfo = document.createElement('div'); 
     const weatherInfoList = document.createElement('ul'); 
@@ -19,6 +21,7 @@ export const createContent = (data) => {
     const weatherInfoPressure = document.createElement('li');  
     const weatherInfoWindSpeed = document.createElement('li');
     const responseDate = document.createElement('li');  
+    const country = document.createElement('li');
 
     section.classList.add('weather'); 
     container.classList.add('container', 'weather__container'); 
@@ -36,11 +39,14 @@ export const createContent = (data) => {
     weatherInfoPressure.classList.add('weather-info__item');
     weatherInfoWindSpeed.classList.add('weather-info__item');
     responseDate.classList.add('weather-info__item', 'response'); 
+    country.classList.add('weather-info__item', 'country'); 
+
 
     temperature.textContent = Math.floor(data.main.temp); 
     description.textContent = capitalizeLetter(data.weather[0].description); 
     iconBloc.src = `https://openweathermap.org/img/w/${data.weather[0].icon}.png`;
     unit.textContent = '°'; 
+
 
     const createWeatherItemTitle = (text) => {
         const span = document.createElement('span'); 
@@ -55,7 +61,20 @@ export const createContent = (data) => {
 
         return p; 
     }
+
+    var countryFromCity = getCountry(data.sys.country); 
+    console.log(countryFromCity);
+
     
+    countryFromCity.then(function(result){
+        country.append(
+            createWeatherItemTitle('Country'), 
+            createWeatherItemContent(result[0].name.official)
+        )
+        console.log(result); 
+    }, function(error){
+        console.log(error); 
+    });
 
     weatherInfoWindSpeed.append(
         createWeatherItemTitle('Wind'),
@@ -100,6 +119,9 @@ export const createContent = (data) => {
     )
     
 
+ 
+ 
+
 
     main.append(section); 
     section.append(container); 
@@ -107,6 +129,7 @@ export const createContent = (data) => {
     inner.append(iconBloc, temperature, unit); 
     weatherInfo.append(weatherInfoList); 
     weatherInfoList.append(
+        country,
         weatherInfoWindSpeed,
         weatherInfoMinTemp,
         weatherInfoMaxTemp,
