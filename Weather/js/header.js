@@ -71,8 +71,7 @@ export const createHeader = (city) => {
 
     searchBtn.textContent = 'OK'; 
     cityName.textContent = city; 
-    //countryName.textContent = 'AZ';
-    //countryName.textContent = country.data.sys.country.description; 
+    countryName.textContent = city;
     cityChange.textContent = 'Change city';
     cityLocation.textContent = 'Current location';
     coordinatesButton.textContent = 'Latitude/Longitude';
@@ -175,6 +174,10 @@ export const createHeader = (city) => {
 
 
 
+
+
+
+
     header.append(headerContainer); 
     headerContainer.append(headerCity, headerUnit); 
     cityInner.append(cityChange, coordinatesButton, cityLocation); 
@@ -183,3 +186,5 @@ export const createHeader = (city) => {
     
     return header;
 }
+
+    

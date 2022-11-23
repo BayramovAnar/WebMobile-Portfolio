@@ -55,6 +55,7 @@ export const createContent = (data) => {
 
         return p; 
     }
+    
 
     weatherInfoWindSpeed.append(
         createWeatherItemTitle('Wind'),
@@ -112,8 +113,9 @@ export const createContent = (data) => {
         weatherInfoRealFeel,
         weatherInfoHumidity,
         weatherInfoPressure,
-        responseDate
+        responseDate,
     ); 
+    
 
     return main; 
 }
